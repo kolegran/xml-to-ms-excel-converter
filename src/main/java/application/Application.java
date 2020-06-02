@@ -2,6 +2,7 @@ package application;
 
 import cddisk.CdDisk;
 import cddisk.ToCdDiskConverter;
+import excel.CdCatalogToMsExcelWriter;
 import parse.SimpleXmlParser;
 
 import java.util.List;
@@ -15,9 +16,6 @@ public class Application {
         final List<Map<String, String>> parsedCdXml = new SimpleXmlParser().parse(CD_CATALOG_XML_PATH, CD_TAG);
         final ToCdDiskConverter toCdDiskConverter = new ToCdDiskConverter();
         final List<CdDisk> cdDisks = toCdDiskConverter.convert(parsedCdXml);
-
-        for (CdDisk cdDisk : cdDisks) {
-            System.out.println(cdDisk);
-        }
+        new CdCatalogToMsExcelWriter().write(cdDisks);
     }
 }
